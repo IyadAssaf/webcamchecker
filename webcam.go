@@ -18,7 +18,7 @@ func getWebcamPid(ctx context.Context) (int, error) {
 }
 
 func getCPUForPid(ctx context.Context, pid int) (float64, error) {
-	cmdStr := "ps -p 462 -o %cpu | grep -v %CPU | awk '{print $1}'"
+	cmdStr := fmt.Sprintf("ps -p %d -o %cpu | grep -v %CPU | awk '{print $1}'", pid)
 	b, err := exec.CommandContext(ctx, "/bin/bash", "-c", fmt.Sprintf("echo $(%s)", cmdStr)).Output()
 	if err != nil {
 		return 0, err
