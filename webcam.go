@@ -9,7 +9,7 @@ import (
 )
 
 func getWebcamPid(ctx context.Context) (int, error) {
-	cmdStr := "ps -u _cmiodalassistants -o pid | grep -v PID | awk '{print $1}'"
+	cmdStr := " ps -u _cmiodalassistants | grep VDCAssistant | awk '{print $2}'"
 	b, err := exec.CommandContext(ctx, "/bin/bash", "-c", fmt.Sprintf("echo $(%s)", cmdStr)).Output()
 	if err != nil {
 		return 0, err
